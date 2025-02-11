@@ -463,6 +463,27 @@
         <div class="shape3"><img src="{{asset('home/img/shape/shape8.png')}}" alt="image"></div>
     </div>
     <!-- End Free Quote Area -->
+    <!-- Start Blog Area -->
+    <div class="blog-area pt-100 pb-70">
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <video class="w-100" controls>
+                        <source src="{{ asset('home/about.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <video class="w-100" controls>
+                        <source src="{{ asset('home/getting-started.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <!-- Start Blog Area -->
     <div class="blog-area pt-100 pb-70">
@@ -521,7 +542,7 @@
 
             </div>
         </div>
-    </section>
+    </div>
     <!-- End News One -->
 
 
