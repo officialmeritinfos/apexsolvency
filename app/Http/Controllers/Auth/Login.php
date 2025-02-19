@@ -46,7 +46,12 @@ class Login extends Controller
         if(Auth::attempt(['username' => $request->email, 'password' => $request->password])){
             //is user active
             $user = Auth::user();
-            if($user->status !=1)return back()->with('error', 'Account is inactive');
+            if($user->status !=1){
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->with('error', 'Account is inactive');
+            }
 
             //check if email is verified
             if ($user->emailVerified !=1){

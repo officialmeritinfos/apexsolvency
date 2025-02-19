@@ -80,7 +80,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function userRoutes()
     {
         Route::prefix('account')
-            ->middleware(['web','auth'])
+            ->middleware(['web','auth','isActive'])
             ->namespace($this->namespace)
             ->group(base_path('routes/user.php'));
     }
