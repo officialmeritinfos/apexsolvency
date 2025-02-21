@@ -22,7 +22,7 @@
                                 <label for="inputAddress2">Date of Birth</label>
                                 <input type="date" class="form-control" id="inputAddress2"
                                        placeholder="Enter your contact number" name="dob"
-                                       value="{{$user->dateOfBirth}}">
+                                       value="{{ $user->dateOfBirth ?? '2000-09-02' }}">
                             </div>
                             <div class="form-group col-md-6 mt-3">
                                 <label for="inputAddress2">Country</label>
