@@ -130,7 +130,7 @@
                             advice and planning service with {{$siteName}}
                         </p>
                         <div class="btn-box">
-                            <a href="{{route('register')}}" class="default-btn">Get Started <i class="ri-arrow-right-line"></i></a>
+                            <a href="{{route('register')}}" class="default-btn">Register <i class="ri-arrow-right-line"></i></a>
                             <a href="{{route('login')}}" class="default-btn">Login <i class="ri-arrow-right-line"></i></a>
                         </div>
                     </div>

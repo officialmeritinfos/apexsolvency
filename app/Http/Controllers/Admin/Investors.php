@@ -446,6 +446,14 @@ class Investors extends Controller
         $data =[
             'isVerified'=>1
         ];
+        $investor = User::where('id',$id)->first();
+
+        $userMessage = "
+                Your KYC submission has been approved, and account fully activated.
+            ";
+        //SendInvestmentNotification::dispatch($investor, $userMessage, 'Balance Topup');
+        $investor->notify(new InvestmentMail($investor, $userMessage, 'KYC Verified'));
+
         User::where('id',$id)->update($data);
 
         return back()->with('success','Successful');
