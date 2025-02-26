@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Notifications\EmailVerifyMail;
 use App\Notifications\InvestmentMail;
 use App\Notifications\WelcomeMail;
+use App\Rules\ReCaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
@@ -41,7 +42,8 @@ class Register extends Controller
             'username'=>['required','max:100','unique:users,username'],
             'password'=>['required','string'],
             'referral'=>['nullable','exists:users,username'],
-            'phone'=>['nullable']
+            'phone'=>['nullable'],
+            'g-recaptcha-response' => ['required', new ReCaptcha]
         ]);
         if ($validator->fails()){
             return back()->with('errors',$validator->errors());

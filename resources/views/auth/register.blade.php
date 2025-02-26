@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('dashboard/user/css/owl.carousel.min.css')}}">
     <!-- Animate Min CSS -->
     <link rel="stylesheet" href="{{asset('dashboard/user/css/animate.min.css')}}">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <!-- Remixicon CSS -->
     <link rel="stylesheet" href="{{asset('dashboard/user/css/remixicon.css')}}">
     <!-- boxicons CSS -->
@@ -107,6 +108,28 @@
                             <input class="form-control" type="text" placeholder="Enter your Phone"
                                    name="referral" value="{{old('referral')}} {{$referral}}"/>
                         </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+
+                                <strong>ReCaptcha:</strong>
+
+                                <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+
+                                @if ($errors->has('g-recaptcha-response'))
+
+                                    <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+
+                                @endif
+
+                            </div>
+
+                        </div>
+
                     </div>
 
                     <div class="col-12">
