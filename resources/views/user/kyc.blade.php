@@ -58,11 +58,6 @@
                                     title="A selfie image"></i> </label>
                                 <input type="file" class="form-control" id="inputAddress2" name="selfie"/>
                             </div>
-                            <div class="form-group col-md-12 mt-3">
-                                <label for="inputAddress2">Membership ID<i class="ri-information-fill" data-bs-toggle="tooltip"
-                                    title="Membership ID issued by {{$siteName}}"></i> </label>
-                                <input type="file" class="form-control" id="inputAddress2" name="membership"/>
-                            </div>
                         </div>
                         <div class="text-center mt-5">
                             <button type="submit" class="btn btn-primary">Submit KYC</button>

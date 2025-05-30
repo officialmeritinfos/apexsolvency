@@ -51,7 +51,6 @@
             <div class="col-lg-8 col-md-8">
                 <ul class="top-header-contact-info">
                     <li><i class="ri-time-line"></i><span>SUN - SAT:</span> 24/7</li>
-                    <li><i class="ri-map-pin-2-line"></i><span>OFFICE:</span> {!! $web->address !!}</li>
                 </ul>
             </div>
         </div>

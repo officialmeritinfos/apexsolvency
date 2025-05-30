@@ -101,9 +101,14 @@ class Withdrawals extends Controller
                 $source = "Account";
                 break;
         }
+        if ( $user->isVerified!=1){
+            return back()->with('error','You must verify your KYC first before requesting for withdrawal.');
+        }
+
         if ($balance < $input['amount']){
             return back()->with('error','Insufficient balance in selected account.');
         }
+
         $ref = $this->generateId('withdrawals','reference',10);
         $data=[
             'user'=>$user->id,'reference'=>$ref,'amount'=>$input['amount'],'asset'=>$input['asset'],
