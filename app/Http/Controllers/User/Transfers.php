@@ -69,7 +69,7 @@ class Transfers extends Controller
         $transfer = Transfer::create([
             'sender'=>$user->id,
             'recipient'=>$receiver->id,
-            'recipientHolder'=>$input['username'],
+            'recipientHolder'=>'User → User',
             'reference'=>$this->generateId('transfers','reference',15),
             'status'=>1
         ]);
@@ -99,4 +99,86 @@ class Transfers extends Controller
         }
         return back()->with('error','Something went wrong');
     }
+    public function bonusToProfit(Request $request)
+    {
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'amount' => ['required', 'numeric', 'gt:0']
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('error', 'Invalid input. Please enter a valid amount.');
+        }
+
+        $amount = $request->input('amount');
+
+        if ($amount > $user->bonus) {
+            return back()->with('error', 'Insufficient bonus balance.');
+        }
+
+        // Update balances
+        $user->bonus -= $amount;
+        $user->profit += $amount;
+
+        // Record transfer
+        $transfer = Transfer::create([
+            'sender' => $user->id,
+            'recipient' => $user->id,
+            'recipientHolder' => 'Bonus → Profit',
+            'reference' => $this->generateId('transfers', 'reference', 15),
+            'status' => 1,
+            'amount' => $amount,
+        ]);
+
+        $user->save();
+
+        // Notify user
+        $message = "You moved $$amount from your <b>Bonus</b> to your <b>Profit</b> balance. (Ref: {$transfer->reference})";
+        $user->notify(new InvestmentMail($user, $message, 'Internal Transfer'));
+
+        return back()->with('success', 'Bonus successfully transferred to profit.');
+    }
+
+    public function refBalToProfit(Request $request)
+    {
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'amount' => ['required', 'numeric', 'gt:0']
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('error', 'Invalid input. Please enter a valid amount.');
+        }
+
+        $amount = $request->input('amount');
+
+        if ($amount > $user->refBal) {
+            return back()->with('error', 'Insufficient referral balance.');
+        }
+
+        // Update balances
+        $user->refBal -= $amount;
+        $user->profit += $amount;
+
+        // Record transfer
+        $transfer = Transfer::create([
+            'sender' => $user->id,
+            'recipient' => $user->id,
+            'recipientHolder' => 'RefBal → Profit',
+            'reference' => $this->generateId('transfers', 'reference', 15),
+            'status' => 1,
+            'amount' => $amount,
+        ]);
+
+        $user->save();
+
+        // Notify user
+        $message = "You moved $$amount from your <b>Referral Balance</b> to your <b>Profit</b> balance. (Ref: {$transfer->reference})";
+        $user->notify(new InvestmentMail($user, $message, 'Internal Transfer'));
+
+        return back()->with('success', 'Referral balance successfully transferred to profit.');
+    }
+
 }

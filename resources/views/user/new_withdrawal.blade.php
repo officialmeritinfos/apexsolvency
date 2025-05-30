@@ -43,8 +43,6 @@
                                     name="account">
                                 <option value="">Select a Account</option>
                                 <option value="1"> Profit Balance</option>
-                                <option value="2"> Referral Balance</option>
-                                <option value="3"> Bonus Balance</option>
                             </select>
                         </div>
                         <div class="text-center">

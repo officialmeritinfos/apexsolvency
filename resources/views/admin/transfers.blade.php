@@ -14,6 +14,7 @@
                     <tr>
                         <th>Sender</th>
                         <th>Receiver</th>
+                        <th>Type</th>
                         <th>Reference</th>
                         <th>Amount</th>
                         <th>Date Initiated</th>
@@ -26,6 +27,7 @@
                         <tr>
                             <td>{{$option->getInvestor($deposit->sender)}}</td>
                             <td>{{$option->getInvestor($deposit->recipient)}}</td>
+                            <td>{{ $deposit->recipientHolder }}</td>
                             <td>{{$deposit->reference}}</td>
                             <td>{{number_format($deposit->amount,2)}}</td>
                             <td>{{$deposit->created_at}}</td>

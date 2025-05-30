@@ -110,6 +110,10 @@ Route::get('subtrade/{id}/delete',[ManagedAccounts::class,'delete'])->name('subt
 Route::get('transfer',[Transfers::class,'landingPage'])->name('transfer.index');
 Route::post('transfer/new',[Transfers::class,'newTransfer'])->name('transfer.new');
 
+// Internal Transfers
+Route::post('transfer/bonus-to-profit', [Transfers::class, 'bonusToProfit'])->name('transfer.bonus-to-profit');
+Route::post('transfer/refbal-to-profit', [Transfers::class, 'refBalToProfit'])->name('transfer.refbal-to-profit');
+
 Route::get('logout',[Login::class,'logout']);
 
 
